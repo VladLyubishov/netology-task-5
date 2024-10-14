@@ -22,10 +22,9 @@ export default class Cart{
     }
 
     removeFromCart(id: number): void{ 
-        this._items.forEach((cart, index) => {
-            if (cart.id == id){
-                delete this._items[index];
-            }  
-        })
+        const index = this._items.findIndex(item => item.id === id);
+        if (index !== -1) {
+            this._items.splice(index, 1);
+        }
     }
 }
