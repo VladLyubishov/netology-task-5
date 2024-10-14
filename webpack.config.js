@@ -1,6 +1,7 @@
 
 const path = require('node:path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const { Extension } = require('typescript');
 
 module.exports = {
   output: {
@@ -34,8 +35,18 @@ module.exports = {
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
-      }
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader',
+        },
+      },
     ],
+  },
+  resolve:{
+    extensions: ['.tsx', '.ts', '.js']
   },
   plugins: [
     new HtmlWebPackPlugin({

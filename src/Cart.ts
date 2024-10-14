@@ -11,15 +11,21 @@ export default class Cart{
         return [...this._items]
     }
 
-    getPrice(item: Buyable){
-
+    getPrice(): number{
+        let sum = this._items.reduce((initial, item) => initial + item.price, 0);
+        return sum;
     }
 
-    priceWithDiscount(){
-
+    priceWithDiscount(discount: number): number{
+        let sum = this._items.reduce((initial, item) => initial + item.price, 0);
+        return sum - (sum * (discount / 100));
     }
 
-    removeFromCart(): void{ 
-
+    removeFromCart(id: number): void{ 
+        this._items.forEach((cart, index) => {
+            if (cart.id == id){
+                delete this._items[index];
+            }  
+        })
     }
 }
